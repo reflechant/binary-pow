@@ -5,9 +5,9 @@
        (iterate #(bit-shift-right % 1))
        (take-while pos?)))
 
-(defn bits-be [x]
+(defn bits [x]
   (->> (shifts x)
-       (map #(bit-and % 1))))
+       (map #(bit-test % 0))))
 
 (defn square [x]
   (* x x))
@@ -16,10 +16,8 @@
   (iterate square x))
 
 (defn pow [x n]
-  (cond (zero? n) 1
-        (= 1 n) x
-        :else (->> (interleave (powers x) (bits-be n))
-                   (partition 2)
-                   (map (partial reduce *))
-                   (filter pos?)
-                   (reduce *))))
+  (->> (interleave (powers x) (bits n))
+       (partition 2)
+       (filter second)
+       (map first)
+       (reduce *)))
