@@ -21,3 +21,11 @@
        (filter second)
        (map first)
        (reduce *)))
+
+(defn pow-recursive
+  ([x n] (pow-recursive 1 x n))
+  ([y x n]
+   (cond (zero? n) y
+         (= 1 n) (* x y)
+         (even? n) (recur y (square x) (/ n 2))
+         :else (recur (* x y) (square x) (/ (dec n) 2)))))
