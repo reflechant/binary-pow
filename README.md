@@ -1,4 +1,4 @@
-# binary-pow
+# binary-pow-clj
 
 Binary exponentiation algorithm in Clojure
 
